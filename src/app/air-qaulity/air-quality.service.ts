@@ -17,7 +17,7 @@ export const _options: any = {
 export class AirQualityService {
   constructor(private http: HttpClient) {}
 
-  getAirQuality(): Observable<IAirQuality[]> {
+  getAirQuality(): Observable<any[]> {
     const _url =
       'https://air-quality-by-api-ninjas.p.rapidapi.com/v1/airquality?city=Seattle';
 

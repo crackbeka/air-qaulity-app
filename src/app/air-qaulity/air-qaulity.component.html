@@ -1,5 +1,35 @@
-<div *ngFor="let item of airQuality$ | async">
-  <h1 class="bg-blue-500">{{ item.city }}</h1>
-</div>
+<div class="flex justify-between">
+  <canvas
+    baseChart
+    [type]="'pie'"
+    [datasets]="pieChartDatasets"
+    [labels]="pieChartLabels"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend"
+  >
+  </canvas>
 
-<h1>dlksanlknsa;cmals</h1>
+  <div style="display: block">
+    <canvas
+      baseChart
+      width="400"
+      height="400"
+      [type]="'line'"
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [legend]="lineChartLegend"
+    >
+    </canvas>
+  </div>
+
+  <canvas
+    baseChart
+    [data]="barChartData"
+    [options]="barChartOptions"
+    [plugins]="barChartPlugins"
+    [legend]="barChartLegend"
+    [type]="'bar'"
+  >
+  </canvas>
+</div>
