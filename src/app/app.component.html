@@ -20,11 +20,14 @@
 
 <div class="content">
   <div class="flex">
+    <h1 class="flex mr-2">
+      Change To :{{ darkMode ? "Light Mode" : "Dark Mode" }}
+    </h1>
+
     <mat-slide-toggle
       color="primary"
       (change)="onToggleButtonClick()"
     ></mat-slide-toggle>
-    <h1 class="flex">Change To :{{ darkMode ? "Light Mode" : "Dark Mode" }}</h1>
   </div>
   <app-air-qaulity></app-air-qaulity>
 </div>
