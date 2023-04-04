@@ -8,7 +8,7 @@ import { AirQualityService } from './air-quality.service';
   styleUrls: ['./air-qaulity.component.scss'],
 })
 export class AirQaulityComponent implements OnInit {
-  airQuality$: Observable<any[]>;
+  airQuality: any;
 
   constructor(private _airQualityService: AirQualityService) {}
 
@@ -17,6 +17,8 @@ export class AirQaulityComponent implements OnInit {
   }
 
   getAirQuality() {
-    this.airQuality$ = this._airQualityService.getAirQuality();
+    this._airQualityService.getAirQuality().subscribe((result) => {
+      this.airQuality = result;
+    });
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, switchMap } from 'rxjs';
-import { IAirQuality } from './air-quality-model';
 
 export const _options: any = {
   observe: 'response',
@@ -18,8 +17,12 @@ export class AirQualityService {
   constructor(private http: HttpClient) {}
 
   getAirQuality(): Observable<any[]> {
+    const city = 'Tbilisi';
+
     const _url =
-      'https://air-quality-by-api-ninjas.p.rapidapi.com/v1/airquality?city=Seattle';
+      'https://air-quality-by-api-ninjas.p.rapidapi.com/v1/airquality?' +
+      'city=' +
+      encodeURIComponent('' + city);
 
     return this.http.request('get', _url, _options).pipe(
       switchMap((response: any) => {
