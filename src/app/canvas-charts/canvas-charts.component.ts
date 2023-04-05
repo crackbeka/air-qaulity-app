@@ -1,63 +1,96 @@
-import { Component } from '@angular/core';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { EChartsOption } from 'echarts';
+import { AirQuality } from '../air-qaulity/air-quality-model';
 
 @Component({
   selector: 'app-canvas-charts',
   templateUrl: './canvas-charts.component.html',
   styleUrls: ['./canvas-charts.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CanvasChartsComponent {
-  // pie chart
-  public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
-  };
-  public pieChartLabels = [
-    ['Download', 'Sales'],
-    ['In', 'Store', 'Sales'],
-    'Mail Sales',
-  ];
-  public pieChartDatasets = [
-    {
-      data: [300, 500, 100],
+export class CanvasChartsComponent implements OnChanges {
+  @Input()
+  data?: AirQuality;
+
+  aqiOptions: EChartsOption = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+      source: [],
     },
-  ];
-  public pieChartLegend = true;
-  public pieChartPlugins = [];
+    xAxis: { type: 'category' },
+    yAxis: {},
+    series: [
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+    ],
+  };
 
-  // line chart
+  concentrationOptions: EChartsOption = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+      source: [],
+    },
+    xAxis: { type: 'category' },
+    yAxis: {},
+    series: [
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+      { type: 'pie' },
+    ],
+  };
 
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        data: [65, 59, 80, 81, 56, 55, 40],
-        label: 'Series A',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)',
+  constructor() {}
+
+  ngOnChanges({ data }: SimpleChanges): void {
+    if (data.currentValue) {
+      this.renderCharts(data.currentValue);
+    }
+  }
+
+  private renderCharts(data: AirQuality) {
+    this.aqiOptions = {
+      ...this.aqiOptions,
+      dataset: {
+        ...this.aqiOptions.dataset,
+        source: [
+          ['CO', data.CO.aqi],
+          ['NO2', data.NO2.aqi],
+          ['O3', data.O3.aqi],
+          ['SO2', data.SO2.aqi],
+          ['PM2.5', data['PM2.5'].aqi],
+          ['PM10', data.PM10.aqi],
+        ],
       },
-    ],
-  };
-  public lineChartOptions: ChartOptions<'line'> = {
-    responsive: false,
-  };
-  public lineChartLegend = true;
+    };
 
-  // bar chart
-
-  public barChartLegend = true;
-  public barChartPlugins = [];
-
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-    datasets: [
-      { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-      { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    ],
-  };
-
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
-  };
+    this.concentrationOptions = {
+      ...this.concentrationOptions,
+      dataset: {
+        ...this.concentrationOptions.dataset,
+        source: [
+          ['CO', data.CO.concentration],
+          ['NO2', data.NO2.concentration],
+          ['O3', data.O3.concentration],
+          ['SO2', data.SO2.concentration],
+          ['PM2.5', data['PM2.5'].concentration],
+          ['PM10', data.PM10.concentration],
+        ],
+      },
+    };
+  }
 }

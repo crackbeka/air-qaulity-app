@@ -11,8 +11,16 @@ export class AppComponent implements OnInit {
   myData: any;
 
   ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      console.log(coords);
+      localStorage.setItem(
+        'coords',
+        JSON.stringify({ lat: coords.latitude, lng: coords.longitude })
+      );
+    });
+
     const video = document.getElementById('bgVideo') as HTMLVideoElement;
-    video.play();
+    video?.play();
 
     // Get the stored data from local storage
     const storedData = localStorage.getItem('bgVideo');

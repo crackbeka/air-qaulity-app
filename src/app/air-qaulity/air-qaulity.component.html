@@ -1,7 +1,3 @@
-<div>
-  <app-canvas-charts></app-canvas-charts>
-</div>
+<app-canvas-charts [data]="airQulaity"></app-canvas-charts>
 
-<div *ngIf="airQuality">
-  <h1>{{ airQuality }}</h1>
-</div>
+<div #map [ngStyle]="{ height: '300px' }"></div>

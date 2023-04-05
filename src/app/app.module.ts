@@ -6,9 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AirQaulityComponent } from './air-qaulity/air-qaulity.component';
 import { MatButtonModule } from '@angular/material/button';
-import { NgChartsModule } from 'ng2-charts';
 import { CanvasChartsComponent } from './canvas-charts/canvas-charts.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [AppComponent, AirQaulityComponent, CanvasChartsComponent],
@@ -17,8 +17,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     AppRoutingModule,
     HttpClientModule,
     MatButtonModule,
-    NgChartsModule,
     MatSlideToggleModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
