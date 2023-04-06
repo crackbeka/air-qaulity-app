@@ -1,4 +1,4 @@
-<div *ngIf="darkMode">
+<div *ngIf="darkMode" class="opacity-70">
   <video autoplay muted loop id="bgVideo">
     <source
       src="assets/background-video/daffodils-112389.mp4"
@@ -8,7 +8,7 @@
   </video>
 </div>
 
-<div *ngIf="!darkMode">
+<div *ngIf="!darkMode" class="opacity-50">
   <video autoplay muted loop id="bgVideo">
     <source
       src="../assets/background-video/wood-anemones-112429.mp4"
@@ -18,13 +18,15 @@
   </video>
 </div>
 
-<div class="content">
+<div class="content relative">
   <div class="flex">
     <h1 class="flex mr-2">
       Change To :{{ darkMode ? "Light Mode" : "Dark Mode" }}
     </h1>
 
     <mat-slide-toggle
+      [(ngModel)]="myData"
+      name="myData"
       color="primary"
       (change)="onToggleButtonClick()"
     ></mat-slide-toggle>

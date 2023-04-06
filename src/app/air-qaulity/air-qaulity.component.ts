@@ -11,6 +11,8 @@ import { CriticalLevel } from '../utils/critical-levels';
 import { AirQuality } from './air-quality-model';
 import { AirQualityService } from './air-quality.service';
 import * as L from 'leaflet';
+import { MatDialog } from '@angular/material/dialog';
+import { AirPollutionModalComponent } from './air-pollution-modal/air-pollution-modal.component';
 
 @Component({
   selector: 'app-air-qaulity',
@@ -24,7 +26,12 @@ export class AirQaulityComponent implements OnInit, OnDestroy, AfterViewInit {
 
   airQulaity: AirQuality;
 
-  constructor(private _airQualityService: AirQualityService) {}
+  showAlertMessage = false;
+
+  constructor(
+    private _airQualityService: AirQualityService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this._airQualityService
@@ -40,13 +47,24 @@ export class AirQaulityComponent implements OnInit, OnDestroy, AfterViewInit {
     Object.entries(data).forEach(([key, obj]) => {
       if (key in CriticalLevel.aqi) {
         if (obj.aqi >= CriticalLevel.aqi[key]) {
-          alert('Critical AQI!');
+          const dialogRef = this.dialog.open(AirPollutionModalComponent, {
+            disableClose: true,
+          });
+          dialogRef.afterClosed().subscribe(() => {
+            this.showAlertMessage = true;
+          });
         }
       }
 
       if (key in CriticalLevel.concentration) {
         if (obj.concentration >= CriticalLevel.concentration[key]) {
-          alert('Critical Concentration!');
+          const dialogRef = this.dialog.open(AirPollutionModalComponent, {
+            disableClose: true,
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            console.log(`Dialog result: ${result}`);
+          });
         }
       }
     });

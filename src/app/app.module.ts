@@ -9,15 +9,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { CanvasChartsComponent } from './canvas-charts/canvas-charts.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { AirPollutionModalComponent } from './air-qaulity/air-pollution-modal/air-pollution-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, AirQaulityComponent, CanvasChartsComponent],
+  declarations: [
+    AppComponent,
+    AirQaulityComponent,
+    CanvasChartsComponent,
+    AirPollutionModalComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     MatButtonModule,
     MatSlideToggleModule,
+    MatDialogModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

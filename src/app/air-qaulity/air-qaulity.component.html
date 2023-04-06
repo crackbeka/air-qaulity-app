@@ -1,3 +1,8 @@
-<app-canvas-charts [data]="airQulaity"></app-canvas-charts>
+<h1 *ngIf="showAlertMessage" class="text-center">
+  User Accept to continue work
+</h1>
 
-<div #map [ngStyle]="{ height: '300px' }"></div>
+<div>
+  <app-canvas-charts [data]="airQulaity"></app-canvas-charts>
+</div>
+<div #map class="h-96 mt-12"></div>

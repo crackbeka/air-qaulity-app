@@ -1,2 +1,11 @@
-<div echarts [options]="aqiOptions"></div>
-<div echarts [options]="concentrationOptions"></div>
+<div class="flex justify-between items-center">
+  <div class="w-full text-center">
+    <h1 class="mb-4">Air Pollution AQI</h1>
+    <div echarts [options]="aqiOptions"></div>
+  </div>
+
+  <div class="w-full text-center">
+    <h1 class="mb-4">Air Pollution Concentracion</h1>
+    <div echarts [options]="concentrationOptions"></div>
+  </div>
+</div>

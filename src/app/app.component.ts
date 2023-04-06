@@ -12,7 +12,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
-      console.log(coords);
       localStorage.setItem(
         'coords',
         JSON.stringify({ lat: coords.latitude, lng: coords.longitude })
@@ -23,10 +22,12 @@ export class AppComponent implements OnInit {
     video?.play();
 
     // Get the stored data from local storage
-    const storedData = localStorage.getItem('bgVideo');
-    if (storedData !== null) {
-      this.myData = JSON.parse(storedData);
-    }
+    this.renderData();
+  }
+
+  renderData() {
+    this.myData = JSON.parse(localStorage.getItem('bgVideo') || '');
+    this.darkMode = this.myData;
   }
 
   onToggleButtonClick() {

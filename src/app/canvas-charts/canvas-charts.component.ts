@@ -15,8 +15,7 @@ import { AirQuality } from '../air-qaulity/air-quality-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CanvasChartsComponent implements OnChanges {
-  @Input()
-  data?: AirQuality;
+  @Input() data?: AirQuality;
 
   aqiOptions: EChartsOption = {
     legend: {},
