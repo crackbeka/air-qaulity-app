@@ -62,8 +62,8 @@ export class AirQaulityComponent implements OnInit, OnDestroy, AfterViewInit {
             disableClose: true,
           });
 
-          dialogRef.afterClosed().subscribe((result) => {
-            console.log(`Dialog result: ${result}`);
+          dialogRef.afterClosed().subscribe(() => {
+            this.showAlertMessage = true;
           });
         }
       }

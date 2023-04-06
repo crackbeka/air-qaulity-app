@@ -22,10 +22,6 @@ export class AppComponent implements OnInit {
     video?.play();
 
     // Get the stored data from local storage
-    this.renderData();
-  }
-
-  renderData() {
     this.myData = JSON.parse(localStorage.getItem('bgVideo') || '');
     this.darkMode = this.myData;
   }
